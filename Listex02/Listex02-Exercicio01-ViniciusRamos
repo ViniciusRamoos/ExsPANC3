@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void gerarArray (int *array, int tamanhoArray);
+void imprimirArray (int *array, int tamanhoArray, char *c);
+void ordenaArray (int *array, int tamanhoArray);
+
+int numOperacoes = 0;
+
+int main(){
+
+    printf( "Aula 03 - Exercicio 01 - Ordenacao Decrescente: \n");
+
+    int *array;
+    int tamanhoArray;
+
+    printf( "\nEntre com o tamanho do Array de inteiros: ");
+    scanf( "%d", &tamanhoArray);
+    array = (int*) malloc(tamanhoArray * sizeof(int));
+
+    gerarArray(array, tamanhoArray);
+
+    printf( "\nOrdenacao");
+    imprimirArray(array, tamanhoArray, "\n Array Desord.[]");
+
+    ordenaArray(array, tamanhoArray);
+
+    imprimirArray(array, tamanhoArray, "\n Array Ord.   []");
+
+    printf( "\n Numero de Operacoes para Ordenacao: %d", numOperacoes);
+
+    return 0;
+}
+
+void gerarArray(int *array, int tamanhoArray){
+
+    int n;
+    srand(time (NULL));
+
+    for(int i=0; i<tamanhoArray; i++){
+        n = rand() % 100;
+        array[i] = n;
+    }
+}
+
+void imprimirArray(int *array, int tamanhoArray, char *c){
+
+    printf( "%s = ", c);
+
+    for(int i=0; i<tamanhoArray; i++){
+        printf( " %d", array[i]);
+    }
+
+
+}
+
+void ordenaArray(int *array, int tamanhoArray){
+
+    for(int i=1; i<tamanhoArray; i++){
+        numOperacoes++;
+
+        int chave;
+        int j;
+
+        j = i;
+        while(array[j-1] < array[j]){
+            numOperacoes++;
+
+            chave = array[j-1];
+            array[j-1] = array[j];
+            array[j] = chave;
+            j--;
+        }
+        printf( " - %d\n", array[j]);
+        imprimirArray(array, tamanhoArray, " Array Ord. Decrescente[]");
+
+    }
+}
