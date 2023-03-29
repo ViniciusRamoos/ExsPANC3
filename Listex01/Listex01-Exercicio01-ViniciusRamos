@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int numOperacoes = 0;
+int arrayMax (int A[], int n);
+
+int main(){
+
+    int tamanhoArray;
+    int *vetorA;
+    int maiorElemento;
+
+    printf("Aula 02 - Exercicio01 - Maior Elemento no Array:\n\n");
+
+    printf("Entre com o valor do Array de Inteiros: ");
+    scanf("%d",&tamanhoArray);
+
+    vetorA = (int*) malloc(tamanhoArray * sizeof(int));
+
+    for (int i=0; i<tamanhoArray; i++){
+        printf("Digite o valor para a posicao %d do Array: ",i+1);
+        scanf("%d",&vetorA[i]);
+    }
+
+    maiorElemento = arrayMax(vetorA, tamanhoArray);
+
+    printf("\nO maior elemento do Array eh: %d (Num. Operacoes = %d)",maiorElemento,numOperacoes);
+
+    return 0;
+}
+
+int arrayMax (int A[], int n){
+
+    int maximo = A[0];
+
+    for (int i=1; i<n; i++){
+        numOperacoes++;
+        if (A[i]>maximo){
+            maximo = A[i];
+            numOperacoes++;
+        }
+    }
+
+    return maximo;
+}
+
