@@ -1,0 +1,103 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void mergeSortRecursivo(int *array, int inicio, int fim);
+void intercalaComSentinela(int *array, int inicio, int meio, int fim);
+void geraArrayAleatorio(int *array);
+void imprimeArray(int *array);
+
+int tamArray;
+
+int main(){
+    printf( "Aula 04 - Exercicio 02 - MergeSort Recursivo com Sentinela:\n");
+
+    int *array;
+
+    printf( "Entre com o tamanho do Array de inteiros: ");
+    scanf( "%d", &tamArray);
+    array = (int*) malloc(tamArray * sizeof(int));
+
+    geraArrayAleatorio(array);
+
+    printf( "Ordenacao");
+    printf( "\n Array Desord.[] = ");
+    imprimeArray(array);
+
+    mergeSortRecursivo(array, 0, tamArray-1);
+
+    printf( "\n Array Ord.   [] = ");
+    imprimeArray(array);
+
+    return 0;
+}
+
+void imprimeArray(int *array){
+
+    for(int i=0; i<tamArray; i++){
+        printf( " %d", array[i]);
+    }
+
+}
+
+void geraArrayAleatorio(int *array){
+
+    int n;
+    srand(time(NULL));
+
+    for(int i=0; i<tamArray; i++){
+        n = rand() % 100;
+        array[i] = n;
+    }
+
+}
+
+void mergeSortRecursivo(int *array, int inicio, int fim){
+
+    if(inicio<fim){
+        int meio = ((inicio+fim)/2);
+        mergeSortRecursivo(array, inicio, meio);
+        mergeSortRecursivo(array, meio+1, fim);
+        intercalaComSentinela(array, inicio, meio, fim);
+        printf( "\n Array Ord.   [] = ");
+        imprimeArray(array);
+    }
+}
+
+void intercalaComSentinela(int *array, int inicio, int meio, int fim){
+
+    int n1 = meio-inicio+1;
+    int n2 = fim-meio;
+    int *L;
+    int *R;
+
+    L = (int*) malloc ((n1+1) * sizeof(int));
+    R = (int*) malloc ((n2+1) * sizeof(int));
+
+    for(int i=0; i<n1; i++){
+        L[i] = array[inicio+i];
+    }
+
+    for(int j=0; j<n2; j++){
+        R[j] = array[meio+1+j];
+    }
+
+    L[n1] = 10000000;
+    R[n2] = 10000000;
+
+    int i=0;
+    int j=0;
+
+    for(int k=inicio; k<=fim; k++){
+        if(L[i] <= R[j]){
+            array[k] = L[i];
+            i++;
+        } else {
+            array[k] = R[j];
+            j++;
+        }
+    }
+
+    free(L);
+    free(R);
+}
