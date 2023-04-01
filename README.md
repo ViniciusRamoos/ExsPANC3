@@ -1,2 +1,2 @@
 # ExsPANC3
-Exercícios da disciplina de Projeto e Análise de Algoritmos. Estes exercícios são formas de estudar algoritmos computacionais através de seu desenvolvimento e análise de tempo de execução.
+Apresento aqui alguns exercícios realizados na disciplina de Projeto e Análise de Algoritmos. Esses exercícios são fundamentais para estudar algoritmos computacionais, permitindo tanto o desenvolvimento quanto a análise do tempo de execução.
